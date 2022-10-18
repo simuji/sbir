@@ -1,8 +1,8 @@
 import torch
 import time
-from model import FGSBIR_Model1
+from model import FGSBIR_Model
 from dataset import get_dataloader
-device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 import argparse
 
 
@@ -17,7 +17,7 @@ if __name__ == "__main__":
     parser.add_argument('--pool_method', type=str, default='AdaptiveAvgPool2d',
                         help='AdaptiveMaxPool2d / AdaptiveAvgPool2d / AvgPool2d')
     parser.add_argument('--root_dir', type=str, default='./../')
-    parser.add_argument('--batchsize', type=int, default=16)
+    parser.add_argument('--batchsize', type=int, default=32)
     parser.add_argument('--nThreads', type=int, default=4)
     parser.add_argument('--learning_rate', type=float, default=0.0001)
     parser.add_argument('--max_epoch', type=int, default=200)
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     print(hp)
 
 
-    model = FGSBIR_Model1(hp)
+    model = FGSBIR_Model(hp)
     model.to(device)
     # model.load_state_dict(torch.load('VGG_ShoeV2_model_best.pth', map_location=device))
     step_count, top1, top10 = -1, 0, 0

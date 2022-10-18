@@ -11,7 +11,7 @@ from rasterize import rasterize_Sketch
 
 
 
-device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class FGSBIR_Dataset(data.Dataset):
     def __init__(self, hp, mode):
