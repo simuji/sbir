@@ -102,9 +102,9 @@ def get_dataloader(hp):
 def get_ransform(type):
     transform_list = []
     if type is 'Train':
-        transform_list.extend([transforms.Resize(256)])
+        transform_list.extend([transforms.Resize(288),transforms.RandomCrop(256)])
     elif type is 'Test':
-        transform_list.extend([transforms.Resize(256)])
+        transform_list.extend([transforms.Resize(288)])
     transform_list.extend(
-        [transforms.ToTensor(), transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
+        [transforms.ToTensor(),transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
     return transforms.Compose(transform_list)

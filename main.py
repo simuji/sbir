@@ -2,7 +2,7 @@ import torch
 import time
 from model import FGSBIR_Model
 from dataset import get_dataloader
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 import argparse
 
 

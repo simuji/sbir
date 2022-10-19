@@ -7,13 +7,8 @@ import torch
 import numpy as np
 
 def l2_norm(x):
-    abs_x=torch.square(x)
-    abs_x=torch.sum(x,dim=1)
-    abs_x=torch.sqrt(x)
-    one = torch.ones_like(x)*0.1
-    abs_x=torch.where(abs_x<0.1,one,abs_x)
-    x=x/abs_x
 
+    x=x/torch.norm(x,p=2,dim=1)[:,None,:,:]
     return(x)
 class Resnet50_Network(nn.Module):
     def __init__(self, hp):
@@ -33,7 +28,7 @@ class Resnet50_Network(nn.Module):
         #x = torch.flatten(x, 1)
         #return F.normalize(x)
         #return l2_norm(x)
-        return x
+        return l2_norm(x)
 class VGG_Network(nn.Module):
     def __init__(self, hp):
         super(VGG_Network, self).__init__()
